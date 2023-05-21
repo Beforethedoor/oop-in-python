@@ -1,5 +1,5 @@
 class StringDescriptor:
-    def __set_name__(self, owner_class, property_name) -> None:
+    def __set_name__(self, owner, property_name) -> None:
         self.property_name = property_name
 
     def __set__(self, instance, value) -> None:
@@ -20,9 +20,13 @@ class Person:
     name = StringDescriptor()
     surname = StringDescriptor()
 
+    def __init__(self, name, surname):
+        self.name = name
+        self.surname = surname
 
-p = Person()
-print(p.name)
-p.name = "asdf"
-print(p.name)
-# p.name = 1234  # ValueError
+
+p = Person("asdf", "ADFAS")
+print(p.name, p.surname)
+p.name = "qwerty"
+print(p.name, p.surname)
+# p.name = 124  # ValueError: name must be str but int was passed.
